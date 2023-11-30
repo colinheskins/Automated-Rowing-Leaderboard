@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student ID Submission</title>
+</head>
+<body>
+    <h1>Enter Student ID:</h1>
+    <form id="studentIdForm" onsubmit="submitStudentId(); return false;">
+        <input type="text" id="studentId" name="studentId" required>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        function submitStudentId() {
+            var studentId = document.getElementById('studentId').value;
+            socket.emit('submit_student_id', {'student_id': studentId});
+        }
+    </script>
+</body>
+</html>

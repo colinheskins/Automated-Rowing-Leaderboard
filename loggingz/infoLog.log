@@ -1,0 +1,16 @@
+2023-11-28 20:48:56,920 werkzeug     INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-28 20:48:56,922 werkzeug     INFO     [33mPress CTRL+C to quit[0m
+2023-11-28 20:49:04,190 werkzeug     INFO     127.0.0.1 - - [28/Nov/2023 20:49:04] "GET /callback?code=O8U3HxRDpZ0ld7SAMffLRqEnOtjP8VGgFccM4E9q HTTP/1.1" 200 -
+2023-11-28 20:49:05,173 httpx        INFO     HTTP Request: POST https://log.concept2.com/oauth/access_token "HTTP/1.1 200 OK"
+2023-11-28 20:49:06,088 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-11-28 20:49:06,091 root         INFO     User Colin Heskins added successfully.
+2023-11-28 20:49:07,115 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-11-28 20:49:07,771 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=%3Ccoroutine%20object%20get_time%20at%200x00000178673FB920%3E&type=rower "HTTP/1.1 200 OK"
+2023-11-28 20:49:07,775 root         INFO     Processing user: Ethan Lazarewicz with distances: []
+2023-11-28 20:49:09,096 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-11-28 20:49:10,383 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=%3Ccoroutine%20object%20get_time%20at%200x000001786748D8C0%3E&type=rower "HTTP/1.1 200 OK"
+2023-11-28 20:49:10,385 root         INFO     Processing user: Colin Heskins with distances: []
+2023-11-28 20:49:10,953 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-11-28 20:49:11,499 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=%3Ccoroutine%20object%20get_time%20at%200x00000178673FB920%3E&type=rower "HTTP/1.1 200 OK"
+2023-11-28 20:49:11,501 root         INFO     Processing user: Colin Heskins with distances: []
