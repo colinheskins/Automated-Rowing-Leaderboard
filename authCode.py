@@ -4,6 +4,7 @@ from threading import Thread
 from urllib.parse import urlencode
 import webbrowser
 import os
+import helpers
 
 #Done by chat gpt, not entirely sure whats going on here
 
@@ -51,7 +52,7 @@ def get_authorization_code(client_id, scope, response_type, redirect_uri):
 
 async def startAuth():
     # Replace these with your actual client details
-    client_id = "VczzsuzCOWWMfUkXarfHS9VWNYGLZdwl62yNQaNB"
+    client_id = helpers.client_id
     scope = "user:read,results:read"
     response_type = "code"
     redirect_uri = "http://localhost:5000/callback"
