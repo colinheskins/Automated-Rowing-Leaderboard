@@ -5,6 +5,8 @@ from urllib.parse import urlencode
 import webbrowser
 import os
 
+#Done by chat gpt, not entirely sure whats going on here
+
 app = Flask(__name__)
 authorization_code = None
 CLIENT_ID = os.getenv("client_id")

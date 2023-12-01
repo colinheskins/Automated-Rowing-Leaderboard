@@ -5,12 +5,18 @@ import helpers
 
 logger = helpers.get_logger()
 
+#creates worksheet object
 async def get_spreadsheet_leaderboard():
-    gc = gspread.service_account(filename="D:\donlods\saintx-rowing-8c078656a295.json")
-    sheet = gc.open_by_key("1HRqRXwVddUr_EfFQLfKMOa-U1m7-HYsYFt-uetcbCaY")
-    worksheet = sheet.get_worksheet(0)
-    return worksheet
+    try:
+        gc = gspread.service_account(filename="D:\donlods\saintx-rowing-8c078656a295.json")
+        sheet = gc.open_by_key("1HRqRXwVddUr_EfFQLfKMOa-U1m7-HYsYFt-uetcbCaY")
+        worksheet = sheet.get_worksheet(0)
+        return worksheet
+    except Exception as e:
+        logger.critical(f"Error creating spreadsheet object. Error: {e}")
 
+
+#adds distance to value in spreadsheet if name already exists, else add name and distance in new row
 async def post_to_spreadsheet(name, distance):
     try:
         worksheet = await get_spreadsheet_leaderboard()

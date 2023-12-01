@@ -4,10 +4,12 @@ import asyncio
 import worksheet
 import logging 
 import helpers
+import authCode
 
 async def main():
     json_filename = 'users.json'
     logger = helpers.get_logger()
+    token1 = await authCode.startAuth() #just test, ignore: has no use
     try:
         with open(json_filename, 'r') as json_file:
             user_data = json.load(json_file)

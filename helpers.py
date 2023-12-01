@@ -17,6 +17,8 @@ async def get_time():
     updatedTime = updated_after_time.strftime("%Y-%m-%dT%H:%M:%S")
     return updatedTime
 
+
+#function to create logger so I didnt have to repeat logger for every file
 def get_logger(    
         LOG_FORMAT     = '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
         LOG_NAME       = '',
