@@ -6,7 +6,7 @@ import helpers
 logger = helpers.get_logger()
 
 #creates worksheet object
-async def get_spreadsheet_leaderboard():
+async def get_spreadsheet():
     try:
         gc = gspread.service_account(filename="D:\donlods\saintx-rowing-8c078656a295.json")
         sheet = gc.open_by_key("1HRqRXwVddUr_EfFQLfKMOa-U1m7-HYsYFt-uetcbCaY")
@@ -17,9 +17,9 @@ async def get_spreadsheet_leaderboard():
 
 
 #adds distance to value in spreadsheet if name already exists, else add name and distance in new row
-async def post_to_spreadsheet(name, distance):
+async def post_to_spreadsheet(name, distances):
     try:
-        worksheet = await get_spreadsheet_leaderboard()
+        worksheet = await get_spreadsheet()
 
         # Get all values in column A
         names_column = worksheet.col_values(1)
@@ -32,7 +32,7 @@ async def post_to_spreadsheet(name, distance):
 
             # Add the information to the next available row
             worksheet.update_cell(next_row, 1, full_name)  # Update column A
-            worksheet.update_cell(next_row, 2, distance)  # Update column B
+            worksheet.update_cell(next_row, 2, sum(distances))  # Update column B with the sum of distances
         else:
             # If the name already exists, find its row index
             row_index = names_column.index(full_name) + 1
@@ -49,12 +49,13 @@ async def post_to_spreadsheet(name, distance):
                 # Handle the case where the current value is not a valid number
                 current_value_numeric = 0
 
-            # Add the new distance to the current value
-            new_total_distance = current_value_numeric + distance
+            # Add the sum of distances to the current value
+            new_total_distance = current_value_numeric + sum(distances)
 
             # Update the corresponding row in column B with the new total distance
             worksheet.update_cell(row_index, 2, new_total_distance)
     except Exception as e:
         logger.error(f"Error writing to spreadsheet: {e}")
+
 
 

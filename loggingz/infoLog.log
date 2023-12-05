@@ -1,3 +1,9 @@
-2023-11-30 20:03:21,100 werkzeug     INFO     [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:5000
-2023-11-30 20:03:21,101 werkzeug     INFO     [33mPress CTRL+C to quit[0m
+2023-12-04 21:58:51,340 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-12-04 21:58:52,058 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=2013-06-21&type=rower "HTTP/1.1 200 OK"
+2023-12-04 21:58:52,059 root         INFO     Processing user: Ethan Lazarewicz with distances: [2504, 2555, 2716, 2000, 371, 6000]
+2023-12-04 21:58:53,215 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-12-04 21:58:53,754 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=2013-06-21&type=rower "HTTP/1.1 200 OK"
+2023-12-04 21:58:53,755 root         INFO     Processing user: Colin Heskins with distances: [701]
+2023-12-04 21:58:54,765 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me "HTTP/1.1 200 OK"
+2023-12-04 21:58:55,478 httpx        INFO     HTTP Request: GET https://log.concept2.com/api/users/me/results?updated_after=2013-06-21&type=rower "HTTP/1.1 200 OK"
+2023-12-04 21:58:55,479 root         INFO     Processing user: Jack Donohue with distances: [2618, 2643, 2707, 2000, 1047, 2883, 3110, 3147, 6000, 591, 237]

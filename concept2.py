@@ -3,6 +3,7 @@ import json
 import authCode
 import logging
 import helpers
+import asyncio
 
 API_BASE_URL = "https://log.concept2.com"
 logger = helpers.get_logger()

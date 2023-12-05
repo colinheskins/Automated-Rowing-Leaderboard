@@ -9,7 +9,7 @@ import authCode
 async def main():
     json_filename = 'users.json'
     logger = helpers.get_logger()
-    token1 = await authCode.startAuth() #just test, ignore: has no use
+    #token1 = await authCode.startAuth() #just test, ignore: has no use
     try:
         with open(json_filename, 'r') as json_file:
             user_data = json.load(json_file)
@@ -19,10 +19,9 @@ async def main():
             name = user.get('name')
             user_info = await concept2.getUserInfo(token)
             if user_info:
-                distances = await concept2.get_results(token)
+                distances,time = await concept2.get_results(token)
                 logger.info(f"Processing user: {name} with distances: {distances}")
-                for distance in distances:
-                    await worksheet.post_to_spreadsheet(name, distance)
+                await worksheet.post_to_spreadsheet(name, distances)
             else:
                 logger.error(f"Error getting user information for token: {token}")
     except FileNotFoundError:
