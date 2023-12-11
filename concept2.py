@@ -5,6 +5,7 @@ import logging
 import helpers
 import asyncio
 
+
 API_BASE_URL = "https://log.concept2.com"
 logger = helpers.get_logger()
 
@@ -37,6 +38,7 @@ async def access_token():
             logger.warning(f"Failed to retrieve data from Concept2 API. HTTP Error {response.status_code}, Auth Code: {auth} ")
   except Exception as e:
       logger.error(f"Error retrieving access code from authorization grant: {auth}. Error: {e}")
+      
 
 #retrieves all workouts from specified time frame now
 async def get_results(token):
@@ -71,6 +73,8 @@ async def get_results(token):
     except Exception as e:
         print(f"Error getting results: {e}")
 
+
+
 #gets account info of user (name of user)
 async def getUserInfo(token):
     try:
@@ -99,6 +103,8 @@ async def add_user_to_json(token):
         fileName = "users.json"
         user_info = await getUserInfo(token)
         name = user_info.get("first_name", "") + " " + user_info.get("last_name", "")
+        userid = user_info.get("id", "")
+        print(userid)
         try:
             # Load existing data from the JSON file
             with open(fileName, 'r') as file:
@@ -112,7 +118,7 @@ async def add_user_to_json(token):
 
         # If the user doesn't exist, add a new entry
         if not user_exists:
-            new_user = {"accessToken": token, "name": name}
+            new_user = {"accessToken": token,"userid" : userid, "name": name}
             json_data["users"].append(new_user)
 
             # Save the updated data back to the JSON file
@@ -121,8 +127,11 @@ async def add_user_to_json(token):
             logger.info(f"User {name} added successfully.")
         else:
             logger.info(f"User {name} already exists.")
+    except FileNotFoundError as e:
+        logger.critical(f"Missing {fileName} file: {e}")
     except Exception as e:
-        logging.error(f"Error adding {name} to JSON file.")
+        logging.error(f"Error adding {token} to JSON file.")
+
 
 
 

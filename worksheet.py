@@ -2,60 +2,40 @@ from google.oauth2.service_account import Credentials
 import gspread
 import asyncio
 import helpers
+from datetime import timedelta,datetime
+
 
 logger = helpers.get_logger()
 
 #creates worksheet object
-async def get_spreadsheet():
+async def get_spreadsheet(sheetNumber):
     try:
         gc = gspread.service_account(filename="D:\donlods\saintx-rowing-8c078656a295.json")
-        sheet = gc.open_by_key("1HRqRXwVddUr_EfFQLfKMOa-U1m7-HYsYFt-uetcbCaY")
-        worksheet = sheet.get_worksheet(0)
+        sheet = gc.open_by_key("1UwRda-4VLryrdWkvnM99HMO_y0Lt78ek8WkV30WWXVw")
+        worksheet = sheet.get_worksheet(sheetNumber)
         return worksheet
     except Exception as e:
         logger.critical(f"Error creating spreadsheet object. Error: {e}")
 
 
 #adds distance to value in spreadsheet if name already exists, else add name and distance in new row
-async def post_to_spreadsheet(name, distances):
+async def post_to_spreadsheet(name, distance, time):
     try:
-        worksheet = await get_spreadsheet()
+        currentTime  = await helpers.get_time()
+        roster_worksheet = await get_spreadsheet(1)  # Assuming sheet2 is at index 1
+        roster_cell = roster_worksheet.find(name)
+        shortened_name = roster_worksheet.cell(roster_cell.row, 2).value
 
-        # Get all values in column A
-        names_column = worksheet.col_values(1)
+        # Get the main sheet (sheet1)
+        main_worksheet = await get_spreadsheet(0)
 
-        # Check if the combination of first name and last name exists
-        full_name = name
-        if full_name not in names_column:
-            # If the name doesn't exist, find the next available row
-            next_row = len(names_column) + 1
+        # Update columns A, B, C, D in the next empty row
+        next_empty_row = len(main_worksheet.col_values(1)) + 1  # Find the next empty row in column A
 
-            # Add the information to the next available row
-            worksheet.update_cell(next_row, 1, full_name)  # Update column A
-            worksheet.update_cell(next_row, 2, sum(distances))  # Update column B with the sum of distances
-        else:
-            # If the name already exists, find its row index
-            row_index = names_column.index(full_name) + 1
-
-            # Get the current value in the corresponding cell
-            current_value = worksheet.cell(row_index, 2).value
-            if current_value is None:
-                current_value = 0
-
-            # Convert the current value to a numeric type (assuming it's a number)
-            try:
-                current_value_numeric = float(current_value)
-            except ValueError:
-                # Handle the case where the current value is not a valid number
-                current_value_numeric = 0
-
-            # Add the sum of distances to the current value
-            new_total_distance = current_value_numeric + sum(distances)
-
-            # Update the corresponding row in column B with the new total distance
-            worksheet.update_cell(row_index, 2, new_total_distance)
+        # Update columns A, B, C, D in the next empty row
+        main_worksheet.update_cell(next_empty_row, 1, shortened_name)
+        main_worksheet.update_cell(next_empty_row, 2, currentTime)
+        main_worksheet.update_cell(next_empty_row, 3, distance)
+        main_worksheet.update_cell(next_empty_row, 4, time)
     except Exception as e:
-        logger.error(f"Error writing to spreadsheet: {e}")
-
-
-
+        logger.critical(f"Error updating spreadsheet. Error: {e}")
