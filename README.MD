@@ -31,7 +31,7 @@ Clone the Repository
 
 bash
 Copy code
-git clone https://github.com/yourusername/flask-google-sheets-integration.git
+git clone the link to this repo. I forgot what it was :|
 cd flask-google-sheets-integration
 Create a Virtual Environment
 
