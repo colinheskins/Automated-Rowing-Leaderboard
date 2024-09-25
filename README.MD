@@ -19,7 +19,6 @@ Modular Codebase: Clean and organized code for easy maintenance and scalability.
 Prerequisites
 Before you begin, ensure you have met the following requirements:
 
-Python 3.7+ installed on your machine. You can download it from here.
 Google Cloud Account to set up Google Sheets API and service account credentials.
 Concept2 Logbook API Credentials (client ID and client secret).
 
